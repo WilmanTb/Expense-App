@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Wilfan Expense</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="ExpenseList">
+        <item>makanan</item>
+        <item>minuman</item>
+        <item>jajanan</item>
+        <item>pakaian</item>
+        <item>lainnya</item>
+    </string-array>
+</resources>

@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "680164107289",
+    "firebase_url": "https://wilfan-expense-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "wilfan-expense",
+    "storage_bucket": "wilfan-expense.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680164107289:android:f1d4548a5a9557788cf688",
+        "android_client_info": {
+          "package_name": "com.wfexpense.wfexpense"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO0UO7lrRs9WGY04ClJWzgZDU35n-l2qY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680164107289:android:3be31a78b19564038cf688",
+        "android_client_info": {
+          "package_name": "com.wilfanexpense.wilfanexpense"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO0UO7lrRs9WGY04ClJWzgZDU35n-l2qY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

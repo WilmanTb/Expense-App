@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/income_item_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-5dp"
+        android:src="@drawable/salary"
+        app:layout_constraintBottom_toBottomOf="@id/income_item_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/income_item_name" />
+
+    <TextView
+        android:id="@+id/income_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Gaji"
+        android:textColor="@color/bigfont"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/income_item_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/remove_income_item"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/remove"
+        app:layout_constraintBottom_toBottomOf="@id/income_item_cost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/income_item_cost" />
+
+    <ImageView
+        android:id="@+id/edit_income_item"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/baseline_edit_24"
+        app:layout_constraintBottom_toBottomOf="@id/income_item_cost"
+        app:layout_constraintEnd_toStartOf="@id/remove_income_item"
+        app:layout_constraintTop_toTopOf="@id/income_item_cost" />
+
+    <TextView
+        android:id="@+id/income_item_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Rp 100.000"
+        android:textColor="@color/bigfont"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/edit_income_item"
+        app:layout_constraintTop_toTopOf="@id/income_item_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
