@@ -21,6 +21,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/img_list_empty"
+        android:layout_marginTop="60dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/newempty"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/img_list_empty"
+        android:text="Hari ini belum ada aktivitas nih..."
+        android:fontFamily="@font/poppins_medium"
+        android:id="@+id/txt_info"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        app:layout_constraintTop_toBottomOf="@id/history">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/history_shimmer_layout">
+
+            </include>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
     <TextView
         android:id="@+id/txt_hari_ini"
         android:layout_width="wrap_content"
@@ -30,6 +73,7 @@
         android:fontFamily="@font/poppins_medium"
         android:text="Hari ini"
         android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/history" />
 
@@ -37,9 +81,11 @@
         android:id="@+id/rc_historyToday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/txt_hari_ini"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/txt_hari_ini"
+        tools:listitem="@layout/list_history" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

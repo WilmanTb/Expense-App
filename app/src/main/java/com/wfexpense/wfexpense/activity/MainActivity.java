@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 String expenseName = et_expense_name.getText().toString();
                 String expenseTotal = et_expense_total.getText().toString();
                 String expesenseDate = et_expense_date.getText().toString();
-                String cleanTotal = expenseTotal.replace(".", "");
+                String cleanTotal = expenseTotal.replace(",", "");
 
 //                if (expenseName.isEmpty() || expenseTotal.isEmpty() || expesenseDate.isEmpty())
 //                    Toast.makeText(MainActivity.this, "Form ga boleh kosong yaaa", Toast.LENGTH_SHORT).show();

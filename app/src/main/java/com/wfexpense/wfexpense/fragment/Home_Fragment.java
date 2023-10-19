@@ -121,57 +121,13 @@ public class Home_Fragment extends Fragment {
         popupMenu.show();
     }
 
-//    private void getExpenseData() {
-//        dbBalance.child("Balance").child("Expense").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    expenseList.clear();
-//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                        String dataKey = dataSnapshot.getKey();
-//                        expenseList.add(dataKey);
-//                    }
-//                    adapter_list_expense.notifyDataSetChanged();
-//                    showExpenseComponents();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
-
-//    private void getIncomeData() {
-//        dbBalance.child("Balance").child("Income").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    incomeList.clear();
-//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                        String dataKey = dataSnapshot.getKey();
-//                        incomeList.add(dataKey);
-//                    }
-//                    adapter_list_income.notifyDataSetChanged();
-//                    showIncomeComponents();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
-
     private void showExpenseComponents() {
         if (!expenseList.isEmpty()) {
             rc_expense.setVisibility(View.VISIBLE);
             txt_expense_bottom.setVisibility(View.VISIBLE);
             cv_expensebottom.setVisibility(View.VISIBLE);
-            txt_expense_bottom.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.item_animation));
-            cv_expensebottom.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.item_animation));
+            txt_expense_bottom.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.item_animation));
+            cv_expensebottom.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.item_animation));
         } else {
             rc_expense.setVisibility(View.GONE);
             txt_expense_bottom.setVisibility(View.GONE);
@@ -184,8 +140,8 @@ public class Home_Fragment extends Fragment {
             rc_income.setVisibility(View.VISIBLE);
             txt_income_bottom.setVisibility(View.VISIBLE);
             cv_incomebottom.setVisibility(View.VISIBLE);
-            txt_income_bottom.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.item_animation));
-            cv_incomebottom.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.item_animation));
+            txt_income_bottom.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.item_animation));
+            cv_incomebottom.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.item_animation));
         } else {
             rc_income.setVisibility(View.GONE);
             txt_income_bottom.setVisibility(View.GONE);

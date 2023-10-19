@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,12 +28,10 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
 
     private Context context;
     private ArrayList<CharSequence> myList;
-    private ArrayList<Balance_Model> mergeList;
 
-    public Adapter_History(Context context, ArrayList<CharSequence> myList, ArrayList<Balance_Model> mergeList) {
+    public Adapter_History(Context context, ArrayList<CharSequence> myList) {
         this.context = context;
         this.myList = myList;
-        this.mergeList = mergeList;
     }
 
     @NonNull
@@ -44,6 +43,7 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ArrayList<Balance_Model> mergeList = new ArrayList<>();
         String currentDate = getCurrentDate();
         holder.tanggal_expense.setText(myList.get(position).toString());
 
@@ -53,7 +53,7 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
 
         DatabaseReference dbBalance = FirebaseDatabase.getInstance(Global_Data.dbUrl).getReference();
 
-        ValueEventListener balanceListener = new ValueEventListener() {
+        ValueEventListener expenseListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -61,7 +61,7 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
 
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         String balanceType = dataSnapshot.getKey();
-                        dbBalance.child("Balance").child(balanceType).orderByChild("tanggal").equalTo(currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
+                        dbBalance.child("Balance").child("Expense").child(balanceType).orderByChild("tanggal").equalTo(currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.exists()) {
@@ -86,8 +86,41 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
             }
         };
 
-        dbBalance.child("Balance").child("Expense").addValueEventListener(balanceListener);
-        dbBalance.child("Balance").child("Income").addValueEventListener(balanceListener);
+        ValueEventListener incomeListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    mergeList.clear();
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String balanceType = dataSnapshot.getKey();
+                        dbBalance.child("Balance").child("Income").child(balanceType).orderByChild("tanggal").equalTo(currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    for (DataSnapshot expenseSnapshot : snapshot.getChildren()) {
+                                        Balance_Model balance_model = expenseSnapshot.getValue(Balance_Model.class);
+                                        mergeList.add(balance_model);
+                                    }
+                                    adapter_list_history.notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
+
+        dbBalance.child("Balance").child("Expense").addValueEventListener(expenseListener);
+        dbBalance.child("Balance").child("Income").addValueEventListener(incomeListener);
     }
 
     @Override

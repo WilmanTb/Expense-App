@@ -126,7 +126,7 @@ public class Adapter_List_Data_Expense extends RecyclerView.Adapter<Adapter_List
                     public void onClick(View v) {
                         String expenseName = et_expense_name.getText().toString();
                         String expenseTotal = et_expense_total.getText().toString();
-                        String cleanText = expenseTotal.replace(".", "");
+                        String cleanText = expenseTotal.replace(",", "");
                         if (expenseName.isEmpty() || expenseTotal.isEmpty())
                             Toast.makeText(context, "Form tidak boleh kosong", Toast.LENGTH_SHORT).show();
                         else {
