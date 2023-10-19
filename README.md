@@ -4,7 +4,7 @@ A native application build with Android Studio Java
 # Project Objective
 An expense and income tracker app to track all your expenses and income by showing them in an attractive list where you can add, edit, and delete data from your expenses and income.
 
-![Screenshot 2023-10-19 112320](https://github.com/WilmanTb/Expense-App/assets/148366527/d7458404-4ed2-4359-84a7-b3369bf01e44)
+![Screenshot 2023-10-19 112320](https://github.com/WilmanTb/Expense-App/assets/148366527/11944175-3c06-4f6f-a585-c4e63c9596b1)
 
 # Libraries
 1. Firebase
