@@ -86,33 +86,6 @@ public class Adapter_List_Data_Expense extends RecyclerView.Adapter<Adapter_List
                 et_expense_name.setText(balance_model.getNama());
                 et_expense_total.setText(balance_model.getHarga());
                 et_expense_total.addTextChangedListener(new CustomTextWatcher(et_expense_total));
-//                et_expense_date.setText(balance_model.getTanggal());
-//
-//                btn_calendar.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        int year = calendar.get(Calendar.YEAR);
-//                        int month = calendar.get(Calendar.MONTH);
-//                        int day = calendar.get(Calendar.DAY_OF_MONTH);
-//
-//                        DatePickerDialog datePickerDialog = new DatePickerDialog(context,
-//                                new DatePickerDialog.OnDateSetListener() {
-//                                    @Override
-//                                    public void onDateSet(DatePicker view, int year, int month, int day) {
-//                                        calendar.set(year, month, day);
-//
-//                                        // Format the selected date as "dd-MM-yyyy"
-//                                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//                                        String formattedDate = dateFormat.format(calendar.getTime());
-//
-//                                        // Display the formatted date in the EditText
-//                                        et_expense_date.setText(formattedDate);
-//                                    }
-//                                }, year, month, day);
-//
-//                        datePickerDialog.show();
-//                    }
-//                });
 
                 btn_batal.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -152,7 +125,7 @@ public class Adapter_List_Data_Expense extends RecyclerView.Adapter<Adapter_List
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dbExpense.child("Balance").child("Expense").addListenerForSingleValueEvent(new ValueEventListener() {
+                        dbExpense.child("Balance").child("Expense").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

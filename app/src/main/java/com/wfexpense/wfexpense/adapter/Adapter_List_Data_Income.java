@@ -119,7 +119,7 @@ public class Adapter_List_Data_Income extends RecyclerView.Adapter<Adapter_List_
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dbIncome.child("Balance").child("Income").addListenerForSingleValueEvent(new ValueEventListener() {
+                        dbIncome.child("Balance").child("Income").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

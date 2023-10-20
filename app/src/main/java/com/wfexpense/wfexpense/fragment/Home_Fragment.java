@@ -169,6 +169,7 @@ public class Home_Fragment extends Fragment {
                         if (expenseMonthExist) {
                             String dataKey = dateSnapshot.getKey();
                             expenseList.add(dataKey);
+
                         }
                     }
                     Handler handler = new Handler();
@@ -176,7 +177,7 @@ public class Home_Fragment extends Fragment {
                         shimmerFrameLayout.stopShimmerAnimation();
                         shimmerFrameLayout.setVisibility(View.GONE);
                         main_view.setVisibility(View.VISIBLE);
-                            },2000);
+                    },2000);
                     adapter_list_expense.notifyDataSetChanged();
                     showExpenseComponents();
 
@@ -233,6 +234,13 @@ public class Home_Fragment extends Fragment {
                         }
                     });
                     txt_expense.setText(formatRupiah(Double.parseDouble(String.valueOf(totalExpense))));
+                } else {
+                    Handler handler = new Handler();
+                    handler.postDelayed(()->{
+                        shimmerFrameLayout.stopShimmerAnimation();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                        main_view.setVisibility(View.VISIBLE);
+                    },2000);
                 }
             }
 
