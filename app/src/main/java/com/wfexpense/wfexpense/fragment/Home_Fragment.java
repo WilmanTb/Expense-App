@@ -210,12 +210,13 @@ public class Home_Fragment extends Fragment {
                                 dbBalance.child("Tabungan").child(month_name.getText().toString()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        int hasilBalance = 0;
+                                        int hasilBalance;
+                                        hasilBalance = totalIncome - totalExpense;
                                         if (snapshot.exists()) {
-                                            hasilBalance = totalIncome - totalExpense;
                                             txt_total_balance.setText(formatRupiah(Double.parseDouble(String.valueOf(hasilBalance))));
                                             dbBalance.child("Tabungan").child(month_name.getText().toString()).child("total").setValue(String.valueOf(hasilBalance));
                                         } else {
+                                            dbBalance.child("Tabungan").child(month_name.getText().toString()).child("total").setValue(String.valueOf(hasilBalance));
                                             txt_total_balance.setText(formatRupiah(Double.parseDouble(String.valueOf(hasilBalance))));
                                         }
                                     }
