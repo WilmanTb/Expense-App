@@ -21,13 +21,16 @@ import com.wfexpense.wfexpense.Global_Data;
 import com.wfexpense.wfexpense.R;
 import com.wfexpense.wfexpense.model.Balance_Model;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Adapter_List_Expense extends RecyclerView.Adapter<Adapter_List_Expense.ViewHolder> {
 
     Context context;
     ArrayList<CharSequence> myList;
     DatabaseReference dbBalance;
+
 
     public Adapter_List_Expense(Context context, ArrayList<CharSequence> myList) {
         this.context = context;
@@ -56,13 +59,17 @@ public class Adapter_List_Expense extends RecyclerView.Adapter<Adapter_List_Expe
         dbBalance.child("Balance").child("Expense").child(tanggalExpense).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int sumExpense = 0;
                 if (snapshot.exists()) {
                     myModel.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         Balance_Model balanceModel = dataSnapshot.getValue(Balance_Model.class);
                         myModel.add(balanceModel);
+                        int expenseCost = Integer.parseInt(balanceModel.getHarga());
+                        sumExpense += expenseCost;
+                        adapter_list_data_expense.notifyDataSetChanged();
                     }
-                    adapter_list_data_expense.notifyDataSetChanged();
+                    holder.total_expense.setText("Total : " + formatRupiah(Double.parseDouble(String.valueOf(sumExpense))));
                 }
             }
 
@@ -81,16 +88,24 @@ public class Adapter_List_Expense extends RecyclerView.Adapter<Adapter_List_Expe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tanggal_expense;
+        TextView tanggal_expense, total_expense;
         RecyclerView rc_list_expense;
         CardView cv_list_expense;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tanggal_expense = itemView.findViewById(R.id.tanggal_expense);
             rc_list_expense = itemView.findViewById(R.id.rc_list_expense);
             cv_list_expense = itemView.findViewById(R.id.cv_list_expense);
+            total_expense = itemView.findViewById(R.id.total_expense);
         }
+    }
+
+    private String formatRupiah(Double number) {
+        Locale locale = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(locale);
+        return formatRupiah.format(number);
     }
 
 }

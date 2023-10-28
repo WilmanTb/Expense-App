@@ -75,25 +75,73 @@ public class History_Fragment extends Fragment {
     }
 
     private void getBalanceActivityData() {
-        ValueEventListener expenseListener = new ValueEventListener() {
+//        ValueEventListener expenseListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    dateBalanceList.clear();
+//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                        String dateBalance = currentDate;
+//                        dateBalanceList.add(dateBalance);
+//                    }
+//                    adapter_history.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        };
+//        ValueEventListener incomeListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    dateBalanceList.clear();
+//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                        String dateBalance = currentDate;
+//                        dateBalanceList.add(dateBalance);
+//                    }
+//                    adapter_history.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        };
+//        dbBalance.child("Balance").child("Expense").child(currentDate).addValueEventListener(expenseListener);
+//        dbBalance.child("Balance").child("Expense").child(currentDate).addValueEventListener(expenseListener);
+
+        dbBalance.child("Balance").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    dateBalanceList.clear();
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        String dateBalance = currentDate;
-                        dateBalanceList.add(dateBalance);
-                    }
-                    adapter_history.notifyDataSetChanged();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String key =  dataSnapshot.getKey();
+                    dbBalance.child("Balance").child(key).child(currentDate).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                String historyDate = currentDate;
+                                dateBalanceList.add(historyDate);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
+                adapter_history.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        };
-        dbBalance.child("Balance").child("Expense").child(currentDate).addValueEventListener(expenseListener);
+        });
     }
 
     private void callShimmerLayout(){

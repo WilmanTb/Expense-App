@@ -21,7 +21,9 @@ import com.wfexpense.wfexpense.Global_Data;
 import com.wfexpense.wfexpense.R;
 import com.wfexpense.wfexpense.model.Balance_Model;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Adapter_List_Income extends RecyclerView.Adapter<Adapter_List_Income.ViewHolder> {
 
@@ -56,13 +58,17 @@ public class Adapter_List_Income extends RecyclerView.Adapter<Adapter_List_Incom
         dbBalance.child("Balance").child("Income").child(tanggalIncome).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int sumIncome = 0;
                 if (snapshot.exists()) {
                     myModel.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         Balance_Model balanceModel = dataSnapshot.getValue(Balance_Model.class);
                         myModel.add(balanceModel);
+                        int expenseCost = Integer.parseInt(balanceModel.getHarga());
+                        sumIncome += expenseCost;
+                        adapter_list_data_income.notifyDataSetChanged();
                     }
-                    adapter_list_data_income.notifyDataSetChanged();
+                    holder.total_income.setText("Total : " + formatRupiah(Double.parseDouble(String.valueOf(sumIncome))));
                 }
             }
 
@@ -80,7 +86,7 @@ public class Adapter_List_Income extends RecyclerView.Adapter<Adapter_List_Incom
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tanggal_income;
+        TextView tanggal_income, total_income;
         RecyclerView rc_list_income;
         CardView cv_list_income;
 
@@ -90,6 +96,14 @@ public class Adapter_List_Income extends RecyclerView.Adapter<Adapter_List_Incom
             tanggal_income = itemView.findViewById(R.id.tanggal_income);
             rc_list_income = itemView.findViewById(R.id.rc_list_income);
             cv_list_income = itemView.findViewById(R.id.cv_list_income);
+            total_income = itemView.findViewById(R.id.total_income);
         }
     }
+
+    private String formatRupiah(Double number) {
+        Locale locale = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(locale);
+        return formatRupiah.format(number);
+    }
+
 }
